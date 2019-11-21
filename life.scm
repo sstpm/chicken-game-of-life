@@ -21,13 +21,14 @@
   ;; Given a cell, return #t if alive (1) or #f if dead (0)
   (= cell 1))
 
-(define (random-state height width)
+(define (random-state width height)
   ;; SRFI-42 supplies list-ec, which allows for list generation in the form of
   ;; (list-ec (: var num) (f)) where f can optionally do somethig with var, but var is not passed to
   ;; f, unlike map or for-each. This means we can use a function f that takes no arguments.
   (list-ec (: n height) (list-ec (: i width) (initialize-cell))))
 
 (define (render state)
+  ;; TODO: Clean this mess up.
   ;; Walk down a state, pretty-printing the status of each cell on each row of the state. EG:
   ;; -----------
   ;; |# ### #  |
@@ -36,11 +37,14 @@
   ;; -----------
   ;; for a board of width 9 and height 3, where # represents a living cell.
   (define horizontal-border-len (+ 2 (length (list-ref state 0))))
+
   (define (print-horizontal-border)
     (define horizontal-border-char "-")
     (do-ec (: i horizontal-border-len) (printf horizontal-border-char))
     (newline))
+
   (print-horizontal-border)
+
   (define (print-row row row-index)
     (define vertical-border-char "|")
     (printf vertical-border-char)
@@ -50,13 +54,13 @@
     (printf vertical-border-char)
     (newline))
   (map (lambda (y) (print-row (list-ref state y) y)) (iota (length state)))
-  (print-horizontal-border)
-  )
+  (print-horizontal-border))
 
 (define (main)
   ;; Main function. Calls everything else.
-  (define state (random-state 20 30))
-  (print state)
+  (define width 150)
+  (define height 50)
+  (define state (random-state width height))
   (render state))
 
 (main)
