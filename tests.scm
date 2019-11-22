@@ -77,10 +77,44 @@
     (test-center-cell)
     (test-top-left-cell)
     (test-bottom-row))
-  (define (test-large-state)
-    ;; Tests for states larger than 3x3
-    #t)
   (test-3x3-state))
 
+(define (test-next-state)
+  ;; A cell with no living neighbhours should stay dead.
+  (define (no-living-neighbours)
+    (define state '((0 0 0)
+                    (0 0 0)
+                    (0 0 0)))
+    (define expt-result '((0 0 0)
+                          (0 0 0)
+                          (0 0 0)))
+    (define result (next-state state))
+    (if (equal? expt-result result)
+        (print "Test no-living-neighbours passed")
+        (print "Failed no-living-neighbhours -- Expected: \n"
+               expt-result
+               "\n but recieved \n"
+               result)))
+  (define (dead-3-neighbours)
+    ;; A dead cell with exactly three living neighbours should become alive.
+    (define state '((0 0 0 0 0)
+                    (0 1 1 0 0)
+                    (0 0 1 0 0)
+                    (0 0 0 0 0)))
+    (define expt-result '((0 0 0 0 0)
+                          (0 1 1 0 0)
+                          (0 1 1 0 0)
+                          (0 0 0 0 0)))
+    (define result (next-state state))
+    (if (equal? expt-result result)
+        (print "Test dead-3-neighbours passed")
+        (print "Failed dead-3-neighbours -- Expected: \n"
+               expt-result
+               "\n but recieved: \n"
+               result)))
+  (no-living-neighbours)
+  (dead-3-neighbours))
 ;; Run the tests
 (test-get-neighbours)
+(print "\nTesting next-state...")
+(test-next-state)
