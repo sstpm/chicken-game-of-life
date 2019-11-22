@@ -1,4 +1,4 @@
-##Conway's Game of Life
+## Conway's Game of Life
 Conway's Game of Life implemented in Chicken Scheme. Based on [Robert Heaton's Advanced Beginner's Programming Project #2](https://robertheaton.com/2018/07/20/project-2-game-of-life/) . 
 
 ### Building the Game
