@@ -94,10 +94,17 @@
   (map (lambda (y) (print-row (list-ref state y) y)) (iota (length state)))
   (print-horizontal-border))
 
+(define (render-loop state)
+  (let loop ((state state))
+    (render state)
+    (define new-state (next-state state))
+    (loop new-state)))
+
 (define (main)
   ;; Main function. Calls everything else.
   (define width 150)
   (define height 50)
-  (define state (random-state width height)))
+  (define state (random-state width height))
+  (render-loop state))
 
 (main)
