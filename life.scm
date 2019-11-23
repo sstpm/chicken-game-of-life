@@ -103,7 +103,7 @@
 (define (main)
   ;; Main function. Calls everything else.
   (define width 150)
-  (define height 50)
+  (define height 70)
   (define state (random-state width height))
   (render-loop state))
 
