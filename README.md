@@ -10,3 +10,7 @@ SRFI-1 supplies better list operations, including the `iota` function, which is 
 SRFI-42 gives access to generators such as `list-ec`, which allows for quick generation of nested lists and easy operations on them.
 Eggs can be installed with `chicken-install -S <egg>`
 After installing the requisite eggs, compile the program with `csc life.scm`
+
+### Testing
+To run the test, comment out the `render-loop` and `main` functions as well as the call to main. Then:
+`csi tests.scm` to run them.
